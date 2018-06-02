@@ -1,0 +1,9 @@
+{
+  "name": "xtal-latx",
+  "version": "0.0.0",
+  "description": "Base Element for xtal custom elements ",
+  "main": "xtal-latx.js",
+  "repository": "https://github.com/bahrus/xtal-latx",
+  "author": "bahrus <anderson.bruce.b@gmail.com>",
+  "license": "MIT"
+}
