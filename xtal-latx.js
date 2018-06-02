@@ -23,6 +23,10 @@ export class XtallatX extends HTMLElement {
     }
     attributeChangedCallback(name, oldVal, newVal) {
         switch (name) {
+            case pass_down:
+                this._passDown = newVal;
+                this.parsePassDown();
+                break;
             case disabled:
                 this._disabled = newVal !== null;
                 break;
