@@ -35,6 +35,7 @@ export function XtallatX(superClass) {
         attributeChangedCallback(name: string, oldVal: string, newVal: string) {
             switch (name) {
                 case pass_down:
+                    if(newVal && newVal.endsWith('}')) newVal += ';';
                     this._passDown = newVal;
                     this.parsePassDown();
                     break;
