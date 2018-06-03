@@ -25,6 +25,8 @@ export function XtallatX(superClass) {
         attributeChangedCallback(name, oldVal, newVal) {
             switch (name) {
                 case pass_down:
+                    if (newVal && newVal.endsWith('}'))
+                        newVal += ';';
                     this._passDown = newVal;
                     this.parsePassDown();
                     break;
@@ -41,6 +43,19 @@ export function XtallatX(superClass) {
             });
             this.dispatchEvent(newEvent);
             return newEvent;
+        }
+        updateResultProp(val, eventName, callBackFn) {
+            if (callBackFn) {
+                val = callBackFn(val, this);
+                if (!val)
+                    return;
+            }
+            if (this._cssPropMap) {
+                this.passDownProp(val);
+            }
+            else {
+                this.de(eventName, val);
+            }
         }
         parsePassDown() {
             this._cssPropMap = [];

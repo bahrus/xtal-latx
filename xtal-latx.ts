@@ -53,6 +53,17 @@ export function XtallatX(superClass) {
             this.dispatchEvent(newEvent);
             return newEvent;
         }
+        updateResultProp(val: any, eventName: string, callBackFn?: any){
+            if(callBackFn){
+                val = callBackFn(val, this);
+                if(!val) return;
+            }
+            if(this._cssPropMap){
+                this.passDownProp(val);
+            }else{
+                this.de(eventName, val);
+            }
+        }
         _cssPropMap: ICssPropMap[];
         parsePassDown() {
             this._cssPropMap = [];
