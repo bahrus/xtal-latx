@@ -53,11 +53,12 @@ export function XtallatX(superClass) {
             this.dispatchEvent(newEvent);
             return newEvent;
         }
-        updateResultProp(val: any, eventName: string, callBackFn?: any){
+        updateResultProp(val: any, eventName: string, propName: string, callBackFn?: any){
             if(callBackFn){
                 val = callBackFn(val, this);
                 if(!val) return;
             }
+            this[propName] = val;
             if(this._cssPropMap){
                 this.passDownProp(val);
             }else{
