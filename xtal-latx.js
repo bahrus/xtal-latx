@@ -64,19 +64,31 @@ export function XtallatX(superClass) {
             splitPassDown.forEach(passDownSelectorAndProp => {
                 if (!passDownSelectorAndProp)
                     return;
-                const splitPassTo2 = passDownSelectorAndProp.split('{');
+                const mapTokens = passDownSelectorAndProp.split('{');
+                const splitPropPointer = mapTokens[1].split(':');
                 this._cssPropMap.push({
-                    cssSelector: splitPassTo2[0],
-                    propTarget: splitPassTo2[1]
+                    cssSelector: mapTokens[0],
+                    propTarget: splitPropPointer[0],
+                    propSource: splitPropPointer.length > 0 ? splitPropPointer[1] : null
                 });
             });
+        }
+        getPropFromPath(val, path) {
+            if (!path)
+                return val;
+            let context = val;
+            path.split('.').forEach(token => {
+                if (context)
+                    context = context[token];
+            });
+            return context;
         }
         passDownProp(val) {
             let nextSibling = this.nextElementSibling;
             while (nextSibling) {
                 this._cssPropMap.forEach(map => {
                     if (nextSibling.matches(map.cssSelector)) {
-                        nextSibling[map.propTarget] = val;
+                        nextSibling[map.propTarget] = this.getPropFromPath(val, map.propSource);
                     }
                 });
                 nextSibling = nextSibling.nextElementSibling;
