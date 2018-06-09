@@ -90,6 +90,11 @@ Suppose you create a little program that will calculate the third number, given 
 <solve-algebra-problem nv id="sumSolver"></solve-algebra-problem><p-d on="first-operand-update" to="#a{value}"/><p-d on="rh_update" to "#b{value}"/>
 <input id="a"/><p-d on="input" to="#c{leftOperand}"></p-d>
 <input id="b"/><p-d on="input" to="#c{rightOperand}"</p-d>
-<input id="c"/><p-u on="input" to="sumSolver{leftOperand:leftOperand;rightOperand:rightOperand;sum:value}"
+<input id="c"/><p-u on="input" to="sumSolver{leftOperand:leftOperand;rightOperand:rightOperand;sum:value}"></p-u>
 ```
 
+The p-u element won't limit itself to siblings -- it will search outside any Shadow DOM.  To seach within the shadow dom of some element use:
+
+```html
+<p-u on="input" to="#shadow-root#sumSolver{leftOperand:leftOperand;rightOperand:rightOperand;sum:value}"></p-u>
+```
