@@ -22,11 +22,9 @@ export function XtallatX(superClass) {
                     break;
             }
         }
-        de(name, value) {
+        de(name, detail) {
             const newEvent = new CustomEvent(name + '-changed', {
-                detail: {
-                    value: value
-                },
+                detail: detail,
                 bubbles: true,
                 composed: false,
             });

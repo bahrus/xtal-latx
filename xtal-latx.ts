@@ -26,11 +26,9 @@ export function XtallatX(superClass) {
                     break;
             }
         }
-        de(name: string, value: any) {
+        de(name: string, detail: any) {
             const newEvent = new CustomEvent(name + '-changed', {
-                detail: {
-                    value: value
-                },
+                detail: detail,
                 bubbles: true,
                 composed: false,
             } as CustomEventInit);
