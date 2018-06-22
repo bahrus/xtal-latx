@@ -8,16 +8,11 @@ export function XtallatX(superClass) {
             return this._disabled;
         }
         set disabled(val) {
-            if (val) {
-                this.setAttribute(disabled, '');
-            }
-            else {
-                this.removeAttribute(disabled);
-            }
+            this.attr(disabled, val, '');
         }
-        attr(name, val) {
+        attr(name, val, trueVal) {
             if (val) {
-                this.setAttribute(name, val);
+                this.setAttribute(name, trueVal || val);
             }
             else {
                 this.removeAttribute(name);
