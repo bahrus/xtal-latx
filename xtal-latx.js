@@ -15,6 +15,14 @@ export function XtallatX(superClass) {
                 this.removeAttribute(disabled);
             }
         }
+        attr(name, val) {
+            if (val) {
+                this.setAttribute(name, val);
+            }
+            else {
+                this.removeAttribute(name);
+            }
+        }
         attributeChangedCallback(name, oldVal, newVal) {
             switch (name) {
                 case disabled:

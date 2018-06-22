@@ -18,7 +18,13 @@ export function XtallatX(superClass) {
             }
         }
 
-    
+        attr(name, val){
+            if(val){
+                this.setAttribute(name, val);
+            }else{
+                this.removeAttribute(name);
+            }
+        }
         attributeChangedCallback(name: string, oldVal: string, newVal: string) {
             switch (name) {
                 case disabled:
