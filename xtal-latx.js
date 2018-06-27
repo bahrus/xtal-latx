@@ -24,11 +24,11 @@ export function XtallatX(superClass) {
         }
         incAttr(name) {
             const ec = this._evCount;
-            if (!ec[name]) {
-                ec[name] = 0;
+            if (name in ec) {
+                ec[name]++;
             }
             else {
-                ec[name]++;
+                ec[name] = 0;
             }
             this.attr(name, ec[name].toString());
         }
