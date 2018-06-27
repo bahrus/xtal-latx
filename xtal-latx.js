@@ -23,12 +23,14 @@ export function XtallatX(superClass) {
             }
         }
         incAttr(name) {
-            if (!this._evCount) {
-                this._evCount[name] = 0;
+            const ec = this._evCount;
+            if (!ec[name]) {
+                ec[name] = 1;
             }
             else {
-                this._evCount[name]++;
+                ec[name]++;
             }
+            this.attr(name, ec[name].toString());
         }
         attributeChangedCallback(name, oldVal, newVal) {
             switch (name) {

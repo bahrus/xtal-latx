@@ -23,11 +23,13 @@ export function XtallatX(superClass) {
         }
         _evCount: {[key: string] : number} = {};
         incAttr(name){
-            if(!this._evCount) {
-                this._evCount[name] = 0;
+            const ec = this._evCount;
+            if(!ec[name]) {
+                ec[name] = 1;
             }else{
-                this._evCount[name]++;
+                ec[name]++;
             }
+            this.attr(name, ec[name].toString());
         }
         attributeChangedCallback(name: string, oldVal: string, newVal: string) {
             switch (name) {
