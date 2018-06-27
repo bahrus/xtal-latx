@@ -21,6 +21,14 @@ export function XtallatX(superClass) {
                 this.removeAttribute(name);
             }
         }
+        _evCount: {[key: string] : number} = {};
+        incAttr(name){
+            if(!this._evCount) {
+                this._evCount[name] = 0;
+            }else{
+                this._evCount[name]++;
+            }
+        }
         attributeChangedCallback(name: string, oldVal: string, newVal: string) {
             switch (name) {
                 case disabled:
@@ -29,12 +37,14 @@ export function XtallatX(superClass) {
             }
         }
         de(name: string, detail: any) {
-            const newEvent = new CustomEvent(name + '-changed', {
+            const eventName = name + '-changed';
+            const newEvent = new CustomEvent(eventName, {
                 detail: detail,
                 bubbles: true,
                 composed: false,
             } as CustomEventInit);
             this.dispatchEvent(newEvent);
+            this.incAttr(eventName);
             return newEvent;
         }
 

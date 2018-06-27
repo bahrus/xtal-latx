@@ -1,6 +1,10 @@
 const disabled = 'disabled';
 export function XtallatX(superClass) {
     return class extends superClass {
+        constructor() {
+            super(...arguments);
+            this._evCount = {};
+        }
         static get observedAttributes() {
             return [disabled];
         }
@@ -18,6 +22,14 @@ export function XtallatX(superClass) {
                 this.removeAttribute(name);
             }
         }
+        incAttr(name) {
+            if (!this._evCount) {
+                this._evCount[name] = 0;
+            }
+            else {
+                this._evCount[name]++;
+            }
+        }
         attributeChangedCallback(name, oldVal, newVal) {
             switch (name) {
                 case disabled:
@@ -26,12 +38,14 @@ export function XtallatX(superClass) {
             }
         }
         de(name, detail) {
-            const newEvent = new CustomEvent(name + '-changed', {
+            const eventName = name + '-changed';
+            const newEvent = new CustomEvent(eventName, {
                 detail: detail,
                 bubbles: true,
                 composed: false,
             });
             this.dispatchEvent(newEvent);
+            this.incAttr(eventName);
             return newEvent;
         }
         _upgradeProperties(props) {
