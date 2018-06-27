@@ -25,7 +25,7 @@ export function XtallatX(superClass) {
         incAttr(name) {
             const ec = this._evCount;
             if (!ec[name]) {
-                ec[name] = 1;
+                ec[name] = 0;
             }
             else {
                 ec[name]++;
