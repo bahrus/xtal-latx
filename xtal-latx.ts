@@ -15,11 +15,8 @@ export function XtallatX(superClass) {
         }
 
         attr(name: string, val: string | boolean, trueVal?: string){
-            if(val){
-                this.setAttribute(name, trueVal || val);
-            }else{
-                this.removeAttribute(name);
-            }
+            const setOrRemove = val ? 'set' : 'remove';
+            this[setOrRemove + 'Attribute'](name, trueVal || val);
         }
         _evCount: {[key: string] : number} = {};
         to$(number){

@@ -15,12 +15,8 @@ export function XtallatX(superClass) {
             this.attr(disabled, val, '');
         }
         attr(name, val, trueVal) {
-            if (val) {
-                this.setAttribute(name, trueVal || val);
-            }
-            else {
-                this.removeAttribute(name);
-            }
+            const setOrRemove = val ? 'set' : 'remove';
+            this[setOrRemove + 'Attribute'](name, trueVal || val);
         }
         to$(number) {
             const mod = number % 2;
