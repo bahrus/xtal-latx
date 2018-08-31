@@ -1,12 +1,12 @@
 const disabled = 'disabled';
 
-export function XtallatX(superClass) {
+export function XtallatX(superClass: any) {
     return class extends superClass {
         static get observedAttributes() {
             return [disabled];
         }    
     
-        _disabled: boolean;
+        _disabled!: boolean;
         get disabled() {
             return this._disabled;
         }
@@ -15,15 +15,15 @@ export function XtallatX(superClass) {
         }
 
         attr(name: string, val: string | boolean, trueVal?: string){
-            const setOrRemove = val ? 'set' : 'remove';
-            this[setOrRemove + 'Attribute'](name, trueVal || val);
+            const v = val ? 'set' : 'remove';  //verb
+            this[v + 'Attribute'](name, trueVal || val);
         }
         _evCount: {[key: string] : number} = {};
-        to$(number){
-            const mod = number % 2;
-            return (number - mod) / 2 + '-' + mod;
+        to$(n: number){
+            const mod = n % 2;
+            return (n - mod) / 2 + '-' + mod;
         }
-        incAttr(name){
+        incAttr(name: string){
             const ec = this._evCount;
             if(name in ec) {
                 ec[name]++;
