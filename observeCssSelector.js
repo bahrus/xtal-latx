@@ -2,7 +2,7 @@ import { getHost } from './getHost.js';
 export function observeCssSelector(superClass) {
     const eventNames = ["animationstart", "MSAnimationStart", "webkitAnimationStart"];
     return class extends superClass {
-        addEventListener(id, targetSelector, insertListener) {
+        addCSSListener(id, targetSelector, insertListener) {
             // See https://davidwalsh.name/detect-node-insertion
             if (this._boundInsertListener)
                 return;

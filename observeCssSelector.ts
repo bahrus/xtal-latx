@@ -8,7 +8,7 @@ export function observeCssSelector(superClass: any) {
 
         _boundInsertListener!: any;
 
-        addEventListener(id: string, targetSelector: string, insertListener: any){
+        addCSSListener(id: string, targetSelector: string, insertListener: any){
             // See https://davidwalsh.name/detect-node-insertion
             if(this._boundInsertListener) return;
             const styleInner = /* css */`
