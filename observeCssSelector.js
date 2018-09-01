@@ -7,7 +7,7 @@ export function observeCssSelector(superClass) {
             if (this._boundInsertListener)
                 return;
             const styleInner = /* css */ `
-            @keyframes ${this.id} {
+            @keyframes ${id} {
                 from {
                     opacity: 0.99;
                 }

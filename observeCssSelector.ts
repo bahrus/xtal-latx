@@ -12,7 +12,7 @@ export function observeCssSelector(superClass: any) {
             // See https://davidwalsh.name/detect-node-insertion
             if(this._boundInsertListener) return;
             const styleInner = /* css */`
-            @keyframes ${this.id} {
+            @keyframes ${id} {
                 from {
                     opacity: 0.99;
                 }
