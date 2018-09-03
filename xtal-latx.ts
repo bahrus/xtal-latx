@@ -1,6 +1,8 @@
 const disabled = 'disabled';
 
-export function XtallatX(superClass: any) {
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+export function XtallatX<TBase extends Constructor<HTMLElement>>(superClass: TBase) {
     return class extends superClass {
         static get observedAttributes() {
             return [disabled];
@@ -16,7 +18,7 @@ export function XtallatX(superClass: any) {
 
         attr(name: string, val: string | boolean, trueVal?: string){
             const v = val ? 'set' : 'remove';  //verb
-            this[v + 'Attribute'](name, trueVal || val);
+            (<any>this)[v + 'Attribute'](name, trueVal || val);
         }
         _evCount: {[key: string] : number} = {};
         to$(n: number){
@@ -54,9 +56,9 @@ export function XtallatX(superClass: any) {
         _upgradeProperties(props: string[]) {
             props.forEach(prop => {
                 if (this.hasOwnProperty(prop)) {
-                    let value = this[prop];
-                    delete this[prop];
-                    this[prop] = value;
+                    let value = (<any>this)[prop];
+                    delete (<any>this)[prop];
+                    (<any>this)[prop] = value;
                 }
             })
     

@@ -50,7 +50,7 @@ export function observeCssSelector(superClass) {
                 // document.removeEventListener("MSAnimationStart", this._boundInsertListener); // IE
                 // document.removeEventListener("webkitAnimationStart", this._boundInsertListener); // Chrome + Safari
             }
-            if (super.disconnectedCallback)
+            if (super.disconnectedCallback !== undefined)
                 super.disconnectedCallback();
         }
     };

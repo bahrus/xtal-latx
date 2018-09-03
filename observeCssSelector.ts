@@ -1,6 +1,15 @@
 import {getHost} from './getHost.js';
 
-export function observeCssSelector(superClass: any) {
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+declare global{
+    interface HTMLElement{
+        disconnectedCallback() : any;
+    }
+}
+
+
+export function observeCssSelector<TBase extends Constructor<HTMLElement>>(superClass: TBase) {
 
     const eventNames = ["animationstart", "MSAnimationStart", "webkitAnimationStart"];
 
@@ -34,7 +43,6 @@ export function observeCssSelector(superClass: any) {
             }else{
                 document.body.appendChild(style);
             }
-            
             this._boundInsertListener = insertListener.bind(this);
             const container = host ? host.shadowRoot : document;
             eventNames.forEach(name =>{
@@ -47,7 +55,7 @@ export function observeCssSelector(superClass: any) {
 
         disconnectedCallback(){
             if(this._boundInsertListener){
-                const host = <any>getHost((<any>this as HTMLElement));
+                const host = <any>getHost(this);
                 const container = host ? host.shadowRoot : document;
                 eventNames.forEach(name =>{
                     container.removeEventListener(name, this._boundInsertListener);
@@ -56,7 +64,7 @@ export function observeCssSelector(superClass: any) {
                 // document.removeEventListener("MSAnimationStart", this._boundInsertListener); // IE
                 // document.removeEventListener("webkitAnimationStart", this._boundInsertListener); // Chrome + Safari
             }
-            if(super.disconnectedCallback) super.disconnectedCallback();
+            if(super.disconnectedCallback !== undefined) super.disconnectedCallback();
         }
     }
 }
