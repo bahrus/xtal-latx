@@ -1,3 +1,4 @@
+import { debounce } from './debounce.js';
 export function getScript(srcScript) {
     const inner = srcScript.innerHTML.trim();
     if (inner.startsWith('return')) {
@@ -16,6 +17,15 @@ export function getScript(srcScript) {
     }
 }
 export function destruct(target, prop, megaProp = 'input') {
+    let debouncers = target._debouncers;
+    if (!debouncers)
+        debouncers = target._debouncers = {};
+    let debouncer = debouncers[megaProp];
+    if (!debouncer) {
+        debouncer = debouncers[megaProp] = debounce(() => {
+            target[megaProp] = Object.assign({}, target[megaProp]);
+        }, 10);
+    }
     Object.defineProperty(target, prop, {
         get: function () {
             return this['_' + prop];
@@ -24,7 +34,8 @@ export function destruct(target, prop, megaProp = 'input') {
             this['_' + prop] = val;
             if (this[megaProp]) {
                 this[megaProp][prop] = val;
-                this[megaProp] = Object.assign({}, this[megaProp]);
+                debouncer();
+                //this[megaProp] = Object.assign({}, this[megaProp]);
             }
             else {
                 this[megaProp] = { [prop]: val };

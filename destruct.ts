@@ -1,3 +1,4 @@
+import {debounce} from './debounce.js';
 export interface IScriptInfo{
     args: string[],
     body: string,
@@ -21,6 +22,14 @@ export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
 }
 
 export function destruct(target: HTMLElement, prop: string, megaProp: string = 'input'){
+    let debouncers = (<any>target)._debouncers;
+    if(!debouncers) debouncers =  (<any>target)._debouncers = {};
+    let debouncer = debouncers[megaProp];
+    if(!debouncer){
+        debouncer = debouncers[megaProp] = debounce(() => {
+            (<any>target)[megaProp] = Object.assign({}, (<any>target)[megaProp]);
+        }, 10);
+    }
     Object.defineProperty(target, prop, {
         get: function () {
             return this['_' + prop];
@@ -29,7 +38,8 @@ export function destruct(target: HTMLElement, prop: string, megaProp: string = '
             this['_' + prop] = val;
             if(this[megaProp]) {
                 this[megaProp][prop] = val;
-                this[megaProp] = Object.assign({}, this[megaProp]);
+                debouncer();
+                //this[megaProp] = Object.assign({}, this[megaProp]);
             }else{
                 this[megaProp] = {[prop]: val}; 
             }
