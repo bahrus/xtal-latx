@@ -5,9 +5,9 @@ export interface IScriptInfo{
 }
 export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
     const inner = srcScript.innerHTML.trim();
-    if(inner.startsWith('return')){
+    if(inner.startsWith('(')){
         const iFatArrowPos = inner.indexOf('=>');
-        const c2del = ['return', '(', ')', '{', '}'];
+        const c2del = ['(', ')', '{', '}'];
         let lhs = inner.substr(0, iFatArrowPos);
         c2del.forEach(t => lhs = lhs.replace(t, ''));
         const rhs = inner.substr(iFatArrowPos + 2);
