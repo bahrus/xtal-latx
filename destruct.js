@@ -3,7 +3,7 @@ export function getScript(srcScript) {
     const inner = srcScript.innerHTML.trim();
     if (inner.startsWith('(')) {
         const ied = self['xtal_latx_ied']; //IE11
-        if (self !== undefined) {
+        if (ied !== undefined) {
             return ied(inner);
         }
         else {
