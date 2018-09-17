@@ -6,15 +6,21 @@ export interface IScriptInfo{
 export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
     const inner = srcScript.innerHTML.trim();
     if(inner.startsWith('(')){
-        const iFatArrowPos = inner.indexOf('=>');
-        const c2del = ['(', ')', '{', '}'];
-        let lhs = inner.substr(0, iFatArrowPos);
-        c2del.forEach(t => lhs = lhs.replace(t, ''));
-        const rhs = inner.substr(iFatArrowPos + 2);
-        return {
-            args: lhs.split(',').map(s => s.trim()),
-            body: rhs,
+        const ied = (<any>self)['xtal_latx_ied']; //IE11
+        if(self !== undefined){
+            return ied(inner);
+        }else{
+            const iFatArrowPos = inner.indexOf('=>');
+            const c2del = ['(', ')', '{', '}'];
+            let lhs = inner.substr(0, iFatArrowPos);
+            c2del.forEach(t => lhs = lhs.replace(t, ''));
+            const rhs = inner.substr(iFatArrowPos + 2);
+            return {
+                args: lhs.split(',').map(s => s.trim()),
+                body: rhs,
+            }
         }
+        
     }else{
         return null;
     }
