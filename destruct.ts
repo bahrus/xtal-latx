@@ -7,7 +7,7 @@ export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
     const inner = srcScript.innerHTML.trim();
     if(inner.startsWith('(')){
         const ied = (<any>self)['xtal_latx_ied']; //IE11
-        if(self !== undefined){
+        if(ied !== undefined){ 
             return ied(inner);
         }else{
             const iFatArrowPos = inner.indexOf('=>');
