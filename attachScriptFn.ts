@@ -21,4 +21,14 @@ function attachFn(constructor: any, count: number, target: any, prop: string){
         return;
     }
     target[prop] = Fn;
+}
+export function getDynScript(el: HTMLElement, callBack: any){
+    (<any>el)._script = el.querySelector('script') as HTMLScriptElement;
+    if(!(<any>el)._script){
+        setTimeout(() => {
+            getDynScript(el, callBack)
+        }, 10);
+        return;
+    }
+    callBack();
 } 

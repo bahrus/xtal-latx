@@ -21,4 +21,14 @@ function attachFn(constructor, count, target, prop) {
     }
     target[prop] = Fn;
 }
+export function getDynScript(el, callBack) {
+    el._script = el.querySelector('script');
+    if (!el._script) {
+        setTimeout(() => {
+            getDynScript(el, callBack);
+        }, 10);
+        return;
+    }
+    callBack();
+}
 //# sourceMappingURL=attachScriptFn.js.map
