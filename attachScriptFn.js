@@ -9,6 +9,7 @@ const constructor = customElements.get('${tagName}');
 constructor['fn_' + ${count}] = __fn;
 `;
     document.head.appendChild(script);
+    attachFn(constructor, count, target, prop);
 }
 function attachFn(constructor, count, target, prop) {
     const Fn = constructor['fn_' + count];
