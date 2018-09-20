@@ -2,11 +2,15 @@ export function attachScriptFn(tagName: string, target: any, prop: string, body:
     const constructor = customElements.get(tagName);
     const count = constructor._count++;
     const script = document.createElement('script');
-    if(supportsStaticImport()) script.type = 'module';
-    script.innerHTML = `
+    
+    if(supportsStaticImport()) {
+        script.type = 'module';
+    }
+    script.innerHTML = `(function () {
 ${body}
 const constructor = customElements.get('${tagName}');
 constructor['fn_' + ${count}] = __fn;
+})();
 `;
     document.head.appendChild(script);
     attachFn(constructor, count, target, prop);
