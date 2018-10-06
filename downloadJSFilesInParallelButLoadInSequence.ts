@@ -1,6 +1,6 @@
-interface IDynamicJSLoadStep {
+export interface IDynamicJSLoadStep {
     src: string;
-}
+} 
 export function downloadJSFilesInParallelButLoadInSequence(refs: IDynamicJSLoadStep[]) {
     //see https://www.html5rocks.com/en/tutorials/speed/script-loading/
     return new Promise((resolve, reject) => {
