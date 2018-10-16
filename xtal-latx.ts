@@ -1,4 +1,4 @@
-const disabled = 'disabled';
+export const disabled = 'disabled';
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 /**

@@ -1,4 +1,4 @@
-const with_path = 'with-path';
+export const with_path = 'with-path';
 /**
  * Custom Element mixin that allows a property to be namespaced
  * @param superClass

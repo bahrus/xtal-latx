@@ -1,7 +1,6 @@
-import {XtallatX} from './xtal-latx.js';
 type Constructor<T = {}> = new (...args: any[]) => T;
 
-const with_path = 'with-path';
+export const with_path = 'with-path';
 
 /**
  * Custom Element mixin that allows a property to be namespaced

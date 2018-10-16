@@ -1,4 +1,4 @@
-const disabled = 'disabled';
+export const disabled = 'disabled';
 /**
  * Base class for many xtal- components
  * @param superClass

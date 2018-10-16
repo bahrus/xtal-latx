@@ -25,7 +25,7 @@ export function downloadJSFilesInParallelButLoadInSequence(refs: IDynamicJSLoadS
                     resolve();
                 }
             }
-            document.head.appendChild(script);
+            document.head!.appendChild(script);
         });
     })
 
