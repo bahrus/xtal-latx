@@ -8,11 +8,13 @@ export function BaseLinkId(superClass) {
             this.setAttribute(baseLinkId, val);
         }
         getFullURL(tail) {
+            let r = tail;
             if (this._baseLinkId) {
                 const link = self[this._baseLinkId];
                 if (link)
-                    return link.href + tail;
+                    r = link.href + r;
             }
+            return r;
         }
     };
 }

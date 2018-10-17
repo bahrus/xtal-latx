@@ -15,10 +15,12 @@ export function BaseLinkId<TBase extends Constructor<HTMLElement>>(superClass: T
 
 
         getFullURL(tail: string) {
+            let r = tail;
             if(this._baseLinkId){
                 const link = (<any>self)[this._baseLinkId] as HTMLLinkElement;
-                if(link) return link.href + tail;
+                if(link) r =  link.href + r;
             }
+            return r;
         }
     }
 
