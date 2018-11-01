@@ -1,3 +1,5 @@
+import {createNestedProp} from './createNestedProp.js';
+
 type Constructor<T = {}> = new (...args: any[]) => T;
 
 export const with_path = 'with-path';
@@ -27,17 +29,18 @@ export function WithPath<TBase extends Constructor<HTMLElement>>(superClass: TBa
         wrap(obj: any){
             if (this._withPath) {
                 let mergedObj = {} as any;
-                const retObj = mergedObj;
-                const splitPath = this._withPath.split('.');
-                const lenMinus1 = splitPath.length - 1;
-                splitPath.forEach((pathToken, idx) => {
-                    if(idx === lenMinus1){
-                        mergedObj[pathToken] = obj;
-                    }else{
-                        mergedObj = mergedObj[pathToken] = {};
-                    }
-                })
-                return retObj;
+                return createNestedProp(mergedObj, this._withPath.split('.'), obj, false);
+                // const retObj = mergedObj;
+                // const splitPath = this._withPath.split('.');
+                // const lenMinus1 = splitPath.length - 1;
+                // splitPath.forEach((pathToken, idx) => {
+                //     if(idx === lenMinus1){
+                //         mergedObj[pathToken] = obj;
+                //     }else{
+                //         mergedObj = mergedObj[pathToken] = {};
+                //     }
+                // })
+                // return retObj;
             }else{
                 return obj;
             }

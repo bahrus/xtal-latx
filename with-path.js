@@ -1,3 +1,4 @@
+import { createNestedProp } from './createNestedProp.js';
 export const with_path = 'with-path';
 /**
  * Custom Element mixin that allows a property to be namespaced
@@ -22,18 +23,18 @@ export function WithPath(superClass) {
         wrap(obj) {
             if (this._withPath) {
                 let mergedObj = {};
-                const retObj = mergedObj;
-                const splitPath = this._withPath.split('.');
-                const lenMinus1 = splitPath.length - 1;
-                splitPath.forEach((pathToken, idx) => {
-                    if (idx === lenMinus1) {
-                        mergedObj[pathToken] = obj;
-                    }
-                    else {
-                        mergedObj = mergedObj[pathToken] = {};
-                    }
-                });
-                return retObj;
+                return createNestedProp(mergedObj, this._withPath.split('.'), obj, false);
+                // const retObj = mergedObj;
+                // const splitPath = this._withPath.split('.');
+                // const lenMinus1 = splitPath.length - 1;
+                // splitPath.forEach((pathToken, idx) => {
+                //     if(idx === lenMinus1){
+                //         mergedObj[pathToken] = obj;
+                //     }else{
+                //         mergedObj = mergedObj[pathToken] = {};
+                //     }
+                // })
+                // return retObj;
             }
             else {
                 return obj;
