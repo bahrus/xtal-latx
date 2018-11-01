@@ -29,7 +29,7 @@ export function WithPath<TBase extends Constructor<HTMLElement>>(superClass: TBa
         wrap(obj: any){
             if (this._withPath) {
                 let mergedObj = {} as any;
-                createNestedProp(mergedObj, this._withPath.split('.'), obj, false);
+                createNestedProp(mergedObj, this._withPath.split('.'), obj, true);
                 return mergedObj;
                 // const retObj = mergedObj;
                 // const splitPath = this._withPath.split('.');
