@@ -15,7 +15,12 @@ export function createNestedProp(target, pathTokens, val, clone) {
         Object.assign(tc[lastToken], val);
     }
     else {
-        tc[lastToken] = val;
+        if (lastToken === undefined) {
+            tc = val;
+        }
+        else {
+            tc[lastToken] = val;
+        }
     }
     //this controversial line is to force the target to see new properties, even though we are updating nested properties.
     //In some scenarios, this will fail (like if updating element.dataset), but hopefully it's okay to ignore such failures 
