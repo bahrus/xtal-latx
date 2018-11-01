@@ -23,7 +23,8 @@ export function WithPath(superClass) {
         wrap(obj) {
             if (this._withPath) {
                 let mergedObj = {};
-                return createNestedProp(mergedObj, this._withPath.split('.'), obj, false);
+                createNestedProp(mergedObj, this._withPath.split('.'), obj, false);
+                return mergedObj;
                 // const retObj = mergedObj;
                 // const splitPath = this._withPath.split('.');
                 // const lenMinus1 = splitPath.length - 1;
