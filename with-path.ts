@@ -44,6 +44,7 @@ export function WithPath<TBase extends Constructor<HTMLElement>>(superClass: TBa
             }else{
                 return obj;
             }
+
         }
     }
 
