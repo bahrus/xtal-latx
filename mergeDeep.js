@@ -1,3 +1,10 @@
+/**
+ * Deep merge two objects.
+ * Inspired by Stackoverflow.com/questions/27936772/deep-object-merging-in-es6-es7
+ * @param target
+ * @param source
+ *
+ */
 export function mergeDeep(target, source) {
     if (typeof target !== 'object')
         return;
