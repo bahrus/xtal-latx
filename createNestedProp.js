@@ -16,7 +16,7 @@ export function createNestedProp(target, pathTokens, val, clone) {
     }
     else {
         if (lastToken === undefined) {
-            tc = val;
+            returnObj[tc] = val;
         }
         else {
             tc[lastToken] = val;
