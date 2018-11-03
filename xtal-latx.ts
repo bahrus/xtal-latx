@@ -1,6 +1,6 @@
 export const disabled = 'disabled';
 
-export interface IXtallatXI {
+export interface IXtallatXI extends HTMLElement {
     /**
      * Any component that emits events should not do so if it is disabled.
      * Note that this is not enforced, but the disabled property is made available.
