@@ -26,6 +26,8 @@ export interface IXtallatXI extends HTMLElement {
      * @param props Array of property names to "upgrade", without losing value set while element was Unknown
      */
     _upgradeProperties(props: string[]): void;
+    attributeChangedCallback(name: string, oldVal: string, newVal: string): void;
+    // static observedAttributes: string[]; 
 }
 type Constructor<T = {}> = new (...args: any[]) => T;
 /**
