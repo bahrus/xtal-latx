@@ -27,6 +27,7 @@ export interface IXtallatXI extends HTMLElement {
      */
     _upgradeProperties(props: string[]): void;
     attributeChangedCallback(name: string, oldVal: string, newVal: string): void;
+    connectedCallback(): void;
     // static observedAttributes: string[]; 
 }
 type Constructor<T = {}> = new (...args: any[]) => T;
