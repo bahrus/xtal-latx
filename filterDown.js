@@ -4,7 +4,7 @@ export function filterDown(el, match, max) {
     const ret = [];
     const isF = typeof match === 'function';
     while (ns) {
-        let isG = typeof match === 'function' ? match(ns) : ns.matches(match);
+        let isG = isF ? match(ns) : ns.matches(match);
         if (isG) {
             ret.push(ns);
             c++;
