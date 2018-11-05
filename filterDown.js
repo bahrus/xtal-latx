@@ -2,8 +2,10 @@ export function filterDown(el, match, max) {
     let c = 0;
     let ns = el.nextElementSibling;
     const ret = [];
+    const isF = typeof match === 'function';
     while (ns) {
-        if (ns.matches(match)) {
+        let isG = typeof match === 'function' ? match(ns) : ns.matches(match);
+        if (isG) {
             ret.push(ns);
             c++;
             if (c >= max)
