@@ -42,6 +42,7 @@ export class NavDown {
             }
             ns = ns.nextElementSibling;
         }
+        this.notify();
     }
     disconnect() {
         this._mutObs.disconnect();

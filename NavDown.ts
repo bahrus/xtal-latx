@@ -37,9 +37,10 @@ export class NavDown{
             }
             ns = ns.nextElementSibling;
         }
+        this.notify();
     }
     _mutObs!: MutationObserver;
-    matches!: Element[];
+    public matches!: Element[];
     disconnect(){
         this._mutObs.disconnect();
     }
