@@ -1,3 +1,4 @@
+interface;
 export function filterDown(el, match, max, recAtr = null, recMatch = null, topEl = null, acc = null, cnt = null) {
     let c = cnt === null ? 0 : cnt;
     let ns = el;

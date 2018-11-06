@@ -1,5 +1,7 @@
 type test = (el: Element | null) => boolean;
-export function filterDown(el: Element | null, match: string | test, max: number, recAtr: string | null = null, recMatch: test | null = null, topEl: Element | null = null, acc: Element[] | null = null, cnt: number | null = null){
+export interface 
+export function filterDown(el: Element | null, match: string | test, max: number, recAtr: string | null = null, 
+    recMatch: test | null = null, topEl: Element | null = null, acc: Element[] | null = null, cnt: number | null = null){
     let c = cnt === null ?  0 : cnt;
     let ns = el;
     const ret : Element[] = acc === null ? [] : acc;
