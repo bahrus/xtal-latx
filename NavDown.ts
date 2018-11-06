@@ -2,7 +2,7 @@ import {debounce} from './debounce.js';
 type ElTest = (el: Element | null) => boolean;
 export class NavDown{
     _debouncer!: any;
-    constructor(public seed: Element, public match: string | ElTest, public notify:() => void, public max: number, public mutDebounce: number = 50){
+    constructor(public seed: Element, public match: string | ElTest, public notify:(nd: NavDown) => void, public max: number, public mutDebounce: number = 50){
         //this.init();
     }
     init(){      
@@ -31,14 +31,14 @@ export class NavDown{
                 this.matches.push(ns);
                 c++;
                 if(c >= this.max ) {
-                    this.notify();
+                    this.notify(this);
                     return;
                 };
             }
             this.sibCheck(ns, c);
             ns = ns.nextElementSibling;
         }
-        this.notify();
+        this.notify(this);
     }
     _mutObs!: MutationObserver;
     public matches!: Element[];

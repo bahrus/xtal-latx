@@ -35,7 +35,7 @@ export class NavDown {
                 this.matches.push(ns);
                 c++;
                 if (c >= this.max) {
-                    this.notify();
+                    this.notify(this);
                     return;
                 }
                 ;
@@ -43,7 +43,7 @@ export class NavDown {
             this.sibCheck(ns, c);
             ns = ns.nextElementSibling;
         }
-        this.notify();
+        this.notify(this);
     }
     disconnect() {
         this._mutObs.disconnect();
