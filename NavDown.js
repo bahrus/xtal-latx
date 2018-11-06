@@ -24,11 +24,11 @@ export class NavDown {
         this._mutObs.observe(elToObs, { childList: true });
         elToObs._addedMutObs = true;
     }
-    sync() {
+    sibCheck(sib, c) { }
+    sync(c = 0) {
         const isF = typeof this.match === 'function';
         this.matches = [];
         let ns = this.seed.nextElementSibling;
-        let c = 0;
         while (ns !== null) {
             let isG = isF ? this.match(ns) : ns.matches(this.match);
             if (isG) {
@@ -40,6 +40,7 @@ export class NavDown {
                 }
                 ;
             }
+            this.sibCheck(ns, c);
             ns = ns.nextElementSibling;
         }
         this.notify();
