@@ -6,7 +6,7 @@ export class NavDown {
         this.notify = notify;
         this.max = max;
         this.mutDebounce = mutDebounce;
-        this.init();
+        //this.init();
     }
     init() {
         this._debouncer = debounce(() => {

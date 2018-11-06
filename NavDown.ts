@@ -3,7 +3,7 @@ type ElTest = (el: Element | null) => boolean;
 export class NavDown{
     _debouncer!: any;
     constructor(public seed: Element, public match: string | ElTest, public notify:() => void, public max: number, public mutDebounce: number = 50){
-        this.init();
+        //this.init();
     }
     init(){      
         this._debouncer = debounce(() =>{
