@@ -13,12 +13,12 @@ export class NavDown{
         this.addMutObs(this.seed.parentElement);
     }
     addMutObs(elToObs: Element | null) {
-        if(elToObs === null || (<any>elToObs)._addedMutObs) return;
+        if(elToObs === null) return;
         this._mutObs = new MutationObserver((m: MutationRecord[]) => {
             this._debouncer(true);
         });
         this._mutObs.observe(elToObs, { childList: true });
-        (<any>elToObs)._addedMutObs = true;
+        // (<any>elToObs)._addedMutObs = true;
     }
     sibCheck(sib: Element, c: number){}
     sync(c = 0){
