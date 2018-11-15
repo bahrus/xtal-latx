@@ -2,9 +2,10 @@ import {debounce} from './debounce.js';
 type ElTest = (el: Element | null) => boolean;
 export class NavDown{
     _debouncer!: any;
-    constructor(public seed: Element, public match: string | ElTest, public notify:(nd: NavDown) => void, public max: number, public mutDebounce: number = 50){
+    constructor(public seed: Element, public match: string | ElTest, public notify:(nd: NavDown) => void, public max: number, public ignore: string | null = null, public mutDebounce: number = 50){
         //this.init();
     }
+
     init(){      
         this._debouncer = debounce(() =>{
             this.sync();
@@ -26,6 +27,9 @@ export class NavDown{
         this.matches = [];
         let ns = this.seed.nextElementSibling;
         while(ns !== null){
+            if(this.ignore !== null){
+                if(ns.matches(this.ignore)) continue;
+            }
             let isG = isF ? (<any>this.match)(ns) : ns.matches(this.match as string);
             if(isG){
                 this.matches.push(ns);

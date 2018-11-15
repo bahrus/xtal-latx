@@ -1,10 +1,11 @@
 import { debounce } from './debounce.js';
 export class NavDown {
-    constructor(seed, match, notify, max, mutDebounce = 50) {
+    constructor(seed, match, notify, max, ignore = null, mutDebounce = 50) {
         this.seed = seed;
         this.match = match;
         this.notify = notify;
         this.max = max;
+        this.ignore = ignore;
         this.mutDebounce = mutDebounce;
         //this.init();
     }
@@ -30,6 +31,10 @@ export class NavDown {
         this.matches = [];
         let ns = this.seed.nextElementSibling;
         while (ns !== null) {
+            if (this.ignore !== null) {
+                if (ns.matches(this.ignore))
+                    continue;
+            }
             let isG = isF ? this.match(ns) : ns.matches(this.match);
             if (isG) {
                 this.matches.push(ns);
