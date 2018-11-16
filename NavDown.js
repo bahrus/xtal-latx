@@ -31,21 +31,19 @@ export class NavDown {
         this.matches = [];
         let ns = this.seed.nextElementSibling;
         while (ns !== null) {
-            if (this.ignore !== null) {
-                if (ns.matches(this.ignore))
-                    continue;
-            }
-            let isG = isF ? this.match(ns) : ns.matches(this.match);
-            if (isG) {
-                this.matches.push(ns);
-                c++;
-                if (c >= this.max) {
-                    this.notify(this);
-                    return;
+            if (this.ignore === null || ns.matches(this.ignore)) {
+                let isG = isF ? this.match(ns) : ns.matches(this.match);
+                if (isG) {
+                    this.matches.push(ns);
+                    c++;
+                    if (c >= this.max) {
+                        this.notify(this);
+                        return;
+                    }
+                    ;
                 }
-                ;
+                this.sibCheck(ns, c);
             }
-            this.sibCheck(ns, c);
             ns = ns.nextElementSibling;
         }
         this.notify(this);

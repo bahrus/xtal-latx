@@ -27,19 +27,19 @@ export class NavDown{
         this.matches = [];
         let ns = this.seed.nextElementSibling;
         while(ns !== null){
-            if(this.ignore !== null){
-                if(ns.matches(this.ignore)) continue;
+            if(this.ignore === null || ns.matches(this.ignore)){
+                let isG = isF ? (<any>this.match)(ns) : ns.matches(this.match as string);
+                if(isG){
+                    this.matches.push(ns);
+                    c++;
+                    if(c >= this.max ) {
+                        this.notify(this);
+                        return;
+                    };
+                }
+                this.sibCheck(ns, c);
+                
             }
-            let isG = isF ? (<any>this.match)(ns) : ns.matches(this.match as string);
-            if(isG){
-                this.matches.push(ns);
-                c++;
-                if(c >= this.max ) {
-                    this.notify(this);
-                    return;
-                };
-            }
-            this.sibCheck(ns, c);
             ns = ns.nextElementSibling;
         }
         this.notify(this);
