@@ -31,7 +31,7 @@ export class NavDown {
         this.matches = [];
         let ns = this.seed.nextElementSibling;
         while (ns !== null) {
-            if (this.ignore === null || ns.matches(this.ignore)) {
+            if (this.ignore === null || !ns.matches(this.ignore)) {
                 let isG = isF ? this.match(ns) : ns.matches(this.match);
                 if (isG) {
                     this.matches.push(ns);
