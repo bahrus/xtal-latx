@@ -1,6 +1,7 @@
 import { debounce } from './debounce.js';
 export function getScript(srcScript) {
     const inner = srcScript.innerHTML.trim();
+    inner.replace('tr = ', '');
     if (inner.startsWith('(')) {
         const ied = self['xtal_latx_ied']; //IE11
         if (ied !== undefined) {
@@ -30,7 +31,7 @@ export function destruct(target, prop, megaProp = 'input') {
     if (!debouncer) {
         debouncer = debouncers[megaProp] = debounce(() => {
             target[megaProp] = Object.assign({}, target[megaProp]);
-        }, 10);
+        }, 10); //use task sceduler?
     }
     Object.defineProperty(target, prop, {
         get: function () {

@@ -5,6 +5,7 @@ export interface IScriptInfo{
 }
 export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
     const inner = srcScript.innerHTML.trim();
+    inner.replace('tr = ', '');
     if(inner.startsWith('(')){
         const ied = (<any>self)['xtal_latx_ied']; //IE11
         if(ied !== undefined){ 
@@ -34,7 +35,7 @@ export function destruct(target: HTMLElement, prop: string, megaProp: string = '
     if(!debouncer){
         debouncer = debouncers[megaProp] = debounce(() => {
             (<any>target)[megaProp] = Object.assign({}, (<any>target)[megaProp]);
-        }, 10);
+        }, 10);  //use task sceduler?
     }
     Object.defineProperty(target, prop, {
         get: function () {
