@@ -5,14 +5,15 @@ export interface IScriptInfo{
 }
 export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
     const inner = srcScript.innerHTML.trim();
-    if(inner.startsWith('(')){
+    const trEq = 'tr = ';
+    if(inner.startsWith('(') || inner.startsWith(trEq)){
         const ied = (<any>self)['xtal_latx_ied']; //IE11
         if(ied !== undefined){ 
             return ied(inner);
         }else{
             const iFatArrowPos = inner.indexOf('=>');
             const c2del = ['(', ')', '{', '}'];
-            let lhs = inner.substr(0, iFatArrowPos).replace('tr = ', '').trim();
+            let lhs = inner.substr(0, iFatArrowPos).replace(trEq, '').trim();
             c2del.forEach(t => lhs = lhs.replace(t, ''));
             const rhs = inner.substr(iFatArrowPos + 2);
             return {
