@@ -4,8 +4,7 @@ export interface IScriptInfo{
     body: string,
 }
 export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
-    const inner = srcScript.innerHTML.trim();
-    inner.replace('tr = ', '');
+    const inner = srcScript.innerHTML.trim().replace('tr = ', '');
     if(inner.startsWith('(')){
         const ied = (<any>self)['xtal_latx_ied']; //IE11
         if(ied !== undefined){ 

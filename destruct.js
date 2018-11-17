@@ -1,7 +1,6 @@
 import { debounce } from './debounce.js';
 export function getScript(srcScript) {
-    const inner = srcScript.innerHTML.trim();
-    inner.replace('tr = ', '');
+    const inner = srcScript.innerHTML.trim().replace('tr = ', '');
     if (inner.startsWith('(')) {
         const ied = self['xtal_latx_ied']; //IE11
         if (ied !== undefined) {
