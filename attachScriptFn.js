@@ -1,11 +1,13 @@
-export function attachScriptFn(tagName, target, prop, body) {
+export function attachScriptFn(tagName, target, prop, body, imports) {
     const constructor = customElements.get(tagName);
     const count = constructor._count++;
     const script = document.createElement('script');
     if (supportsStaticImport()) {
         script.type = 'module';
     }
-    script.innerHTML = `(function () {
+    script.innerHTML = `
+${imports}
+(function () {
 ${body}
 const constructor = customElements.get('${tagName}');
 constructor['fn_' + ${count}] = __fn;

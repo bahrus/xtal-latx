@@ -1,4 +1,4 @@
-export function attachScriptFn(tagName: string, target: any, prop: string, body: string){
+export function attachScriptFn(tagName: string, target: any, prop: string, body: string, imports:string){
     const constructor = customElements.get(tagName);
     const count = constructor._count++;
     const script = document.createElement('script');
@@ -6,13 +6,15 @@ export function attachScriptFn(tagName: string, target: any, prop: string, body:
     if(supportsStaticImport()) {
         script.type = 'module';
     }
-    script.innerHTML = `(function () {
+    script.innerHTML = `
+${imports}
+(function () {
 ${body}
 const constructor = customElements.get('${tagName}');
 constructor['fn_' + ${count}] = __fn;
 })();
 `;
-    document.head.appendChild(script);
+    document.head!.appendChild(script);
     attachFn(constructor, count, target, prop);
 }
 
