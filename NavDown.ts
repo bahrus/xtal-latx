@@ -6,7 +6,7 @@ export class NavDown{
         //this.init();
     }
 
-    init(){      
+    init(){
         this._debouncer = debounce(() =>{
             this.sync();
         }, this.mutDebounce);
