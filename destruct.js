@@ -1,8 +1,8 @@
 import { debounce } from './debounce.js';
-export function getScript(srcScript) {
+export function getScript(srcScript, ignore) {
     const inner = srcScript.innerHTML.trim();
-    const trEq = 'tr = ';
-    if (inner.startsWith('(') || inner.startsWith(trEq)) {
+    //const trEq = 'tr = ';
+    if (inner.startsWith('(') || inner.startsWith(ignore)) {
         const ied = self['xtal_latx_ied']; //IE11
         if (ied !== undefined) {
             return ied(inner);
@@ -10,7 +10,7 @@ export function getScript(srcScript) {
         else {
             const iFatArrowPos = inner.indexOf('=>');
             const c2del = ['(', ')', '{', '}'];
-            let lhs = inner.substr(0, iFatArrowPos).replace(trEq, '').trim();
+            let lhs = inner.substr(0, iFatArrowPos).replace(ignore, '').trim();
             c2del.forEach(t => lhs = lhs.replace(t, ''));
             const rhs = inner.substr(iFatArrowPos + 2);
             return {

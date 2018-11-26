@@ -3,17 +3,17 @@ export interface IScriptInfo{
     args: string[],
     body: string,
 }
-export function  getScript(srcScript: HTMLScriptElement) : IScriptInfo | null{
+export function  getScript(srcScript: HTMLScriptElement, ignore: string) : IScriptInfo | null{
     const inner = srcScript.innerHTML.trim();
-    const trEq = 'tr = ';
-    if(inner.startsWith('(') || inner.startsWith(trEq)){
+    //const trEq = 'tr = ';
+    if(inner.startsWith('(') || inner.startsWith(ignore)){
         const ied = (<any>self)['xtal_latx_ied']; //IE11
         if(ied !== undefined){ 
             return ied(inner);
         }else{
             const iFatArrowPos = inner.indexOf('=>');
             const c2del = ['(', ')', '{', '}'];
-            let lhs = inner.substr(0, iFatArrowPos).replace(trEq, '').trim();
+            let lhs = inner.substr(0, iFatArrowPos).replace(ignore, '').trim();
             c2del.forEach(t => lhs = lhs.replace(t, ''));
             const rhs = inner.substr(iFatArrowPos + 2);
             return {
