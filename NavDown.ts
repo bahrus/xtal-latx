@@ -5,6 +5,7 @@ export class NavDown{
     constructor(public seed: Element, public match: string | ElTest, public notify:(nd: NavDown) => void, public max: number, public ignore: string | null = null, public mutDebounce: number = 50){
         //this.init();
     }
+    _sis!:boolean; //seed is start
 
     init(){
         this._debouncer = debounce(() =>{
@@ -25,7 +26,7 @@ export class NavDown{
     sync(c = 0){
         const isF = typeof this.match === 'function';
         this.matches = [];
-        let ns = this.seed.nextElementSibling;
+        let ns = this._sis ? this.seed : this.seed.nextElementSibling;
         while(ns !== null){
             if(this.ignore === null || !ns.matches(this.ignore)){
                 let isG = isF ? (<any>this.match)(ns) : ns.matches(this.match as string);
