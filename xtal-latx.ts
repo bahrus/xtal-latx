@@ -27,7 +27,7 @@ export interface IXtallatXI extends HTMLElement {
      */
     _upgradeProperties(props: string[]): void;
     attributeChangedCallback(name: string, oldVal: string, newVal: string): void;
-    connectedCallback(): void;
+    connectedCallback?(): void;
     // static observedAttributes: string[]; 
 }
 type Constructor<T = {}> = new (...args: any[]) => T;
@@ -99,7 +99,7 @@ export function XtallatX<TBase extends Constructor<HTMLElement>>(superClass: TBa
          * @param detail Information to be passed with the event
          * @param asIs If true, don't append event name with '-changed'
          */
-        de(name: string, detail: any, asIs?: boolean) {
+        de(name: string, detail: any, asIs: boolean = false) {
             const eventName = name + (asIs ? '' : '-changed');
             const newEvent = new CustomEvent(eventName, {
                 detail: detail,
