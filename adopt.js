@@ -9,7 +9,7 @@ export function adopt(dynamicSlotSelector, container, targetElementSelector, pos
                 if (node.nodeType === 3)
                     return;
                 const nodeEl = node;
-                if (nodeEl.hasAttribute('disabled') && Object.getOwnPropertyDescriptor(nodeEl, 'target')) {
+                if (nodeEl.hasAttribute('disabled')) {
                     nodeEl.removeAttribute('disabled');
                     nodeEl['target'] = targetEl;
                 }
