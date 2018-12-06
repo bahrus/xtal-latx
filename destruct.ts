@@ -34,7 +34,7 @@ export function destruct(target: any, prop: string, megaProp: string = 'input'){
     let debouncer = debouncers[megaProp];
     if(!debouncer){
         debouncer = debouncers[megaProp] = debounce((t) => {
-            (<any>t)[megaProp] = Object.assign({}, (<any>target)[megaProp]);
+            (<any>t)[megaProp] = Object.assign({}, (<any>t)[megaProp]);
         }, 10);  //use task sceduler?
     }
     Object.defineProperty(target, prop, {
