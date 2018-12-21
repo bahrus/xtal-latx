@@ -59,7 +59,7 @@ export function XtallatX<TBase extends Constructor<HTMLElement>>(superClass: TBa
          * @param val 
          * @param trueVal String to set attribute if true.
          */
-        attr(name: string, val: string | boolean, trueVal?: string) {
+        attr(name: string, val: string | boolean | null, trueVal?: string) {
             const v = val ? 'set' : 'remove';  //verb
             (<any>this)[v + 'Attribute'](name, trueVal || val);
         }
