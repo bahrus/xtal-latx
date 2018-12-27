@@ -1,16 +1,16 @@
-import {debounce} from './debounce.js';
+//import {debounce} from './debounce.js';
 type ElTest = (el: Element | null) => boolean;
 export class NavDown{
-    _debouncer!: any;
+    //_debouncer!: any;
     constructor(public seed: Element, public match: string | ElTest, public notify:(nd: NavDown) => void, public max: number, public ignore: string | null = null, public mutDebounce: number = 50){
         //this.init();
     }
     _sis!:boolean; //seed is start
     _inMutLoop = false;
     init(){
-        this._debouncer = debounce(() =>{
-            this.sync();
-        }, this.mutDebounce);
+        // this._debouncer = debounce(() =>{
+        //     this.sync();
+        // }, this.mutDebounce);
         this.sync();
         this.addMutObs(this.seed.parentElement);
     }
@@ -31,8 +31,9 @@ export class NavDown{
                 })
             });
             nodes.forEach(node => delete node.dataset.__pdWIP);
+            this.sync();
             this._inMutLoop = false;
-            this._debouncer(true);
+            //this._debouncer(true);
         });
         this._mutObs.observe(elToObs, { childList: true });
         // (<any>elToObs)._addedMutObs = true;
