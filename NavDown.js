@@ -7,6 +7,7 @@ export class NavDown {
         this.max = max;
         this.ignore = ignore;
         this.mutDebounce = mutDebounce;
+        this._inMutLoop = false;
         //this.init();
     }
     init() {
@@ -19,7 +20,20 @@ export class NavDown {
     addMutObs(elToObs) {
         if (elToObs === null)
             return;
+        const nodes = [];
         this._mutObs = new MutationObserver((m) => {
+            this._inMutLoop = true;
+            m.forEach(mr => {
+                mr.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) {
+                        const el = node;
+                        el.dataset.__pdWIP = '1';
+                        nodes.push(el);
+                    }
+                });
+            });
+            nodes.forEach(node => delete node.dataset.__pdWIP);
+            this._inMutLoop = false;
             this._debouncer(true);
         });
         this._mutObs.observe(elToObs, { childList: true });

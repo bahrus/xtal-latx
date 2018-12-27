@@ -6,7 +6,7 @@ export class NavDown{
         //this.init();
     }
     _sis!:boolean; //seed is start
-
+    _inMutLoop = false;
     init(){
         this._debouncer = debounce(() =>{
             this.sync();
@@ -16,7 +16,22 @@ export class NavDown{
     }
     addMutObs(elToObs: Element | null) {
         if(elToObs === null) return;
+        const nodes: HTMLElement[] = [];
         this._mutObs = new MutationObserver((m: MutationRecord[]) => {
+            this._inMutLoop = true;
+            m.forEach(mr =>{
+                mr.addedNodes.forEach(node =>{
+                    if(node.nodeType === 1){
+                        const el = node as HTMLElement;
+                        el.dataset.__pdWIP = '1';
+                        nodes.push(el);
+                    }
+                    
+                    
+                })
+            });
+            nodes.forEach(node => delete node.dataset.__pdWIP);
+            this._inMutLoop = false;
             this._debouncer(true);
         });
         this._mutObs.observe(elToObs, { childList: true });
