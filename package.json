@@ -1,6 +1,6 @@
 {
   "name": "xtal-latx",
-  "version": "0.0.87",
+  "version": "0.0.88",
   "description": "Base Element for xtal custom elements ",
   "main": "xtal-latx.js",
   "module": "xtal-latx.js",
