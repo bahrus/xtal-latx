@@ -52,4 +52,3 @@ export function destruct(target, prop, megaProp = 'input') {
         configurable: true,
     });
 }
-//# sourceMappingURL=destruct.js.map

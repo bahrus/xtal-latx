@@ -6,4 +6,3 @@ export function define(custEl) {
     }
     customElements.define(tagName, custEl);
 }
-//# sourceMappingURL=define.js.map

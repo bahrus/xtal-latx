@@ -67,4 +67,3 @@ export class NavDown {
         this._mutObs.disconnect();
     }
 }
-//# sourceMappingURL=NavDown.js.map

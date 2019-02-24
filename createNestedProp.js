@@ -31,4 +31,3 @@ export function createNestedProp(target, pathTokens, val, clone) {
         catch (e) { }
     ;
 }
-//# sourceMappingURL=createNestedProp.js.map

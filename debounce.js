@@ -6,4 +6,3 @@ export const debounce = (fn, time) => {
         timeout = setTimeout(functionCall, time);
     };
 };
-//# sourceMappingURL=debounce.js.map
